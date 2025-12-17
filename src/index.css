@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Galaxy Theme Palette */
+  --space-black: #030014;
+  --deep-navy: #0f172a;
+  --nebula-purple: #7000ff;
+  --neon-cyan: #00f3ff;
+  --plasma-pink: #ff0055;
+  --star-white: #ffffff;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(15, 23, 42, 0.3);
+  --glass-border: rgba(0, 243, 255, 0.2);
+  --glass-shimmer: rgba(255, 255, 255, 0.1);
+
+  /* Fonts */
+  --font-hud: 'Orbitron', sans-serif;
+  --font-body: 'Rajdhani', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background-color: #030014 !important;
+  /* Force black background */
+  color: var(--star-white);
+  font-family: var(--font-body);
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-color: #030014;
+  /* Ensure root matches */
+}
+
+/* Scrollbar styling for panels */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--deep-navy);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neon-cyan);
+  border-radius: 3px;
+}
+
+/* Utilities */
+.text-neon {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
+}
+
+.text-glow-purple {
+  color: var(--nebula-purple);
+  text-shadow: 0 0 10px rgba(112, 0, 255, 0.6);
+}
+
+.border-neon {
+  border: 1px solid var(--neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
