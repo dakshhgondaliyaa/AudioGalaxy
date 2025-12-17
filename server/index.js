@@ -7,11 +7,12 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 
-dotenv.config();
-
 // ESM fix for __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Load .env from project root
+dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -26,10 +27,16 @@ app.use((req, res, next) => {
     next();
 });
 
-// MongoDB Connection
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/audiogalaxy';
-mongoose.connect(MONGO_URI)
-    .then(() => console.log('MongoDB Connected to Galaxy Database'))
+// MongoDB Connection - Atlas only, no fallback to localhost
+const MONGODB_URI = process.env.MONGODB_URI;
+if (!MONGODB_URI) {
+    console.error('ERROR: MONGODB_URI environment variable is not set!');
+    console.error('Please ensure .env file exists with MONGODB_URI configured.');
+    process.exit(1);
+}
+console.log('Connecting to MongoDB Atlas...');
+mongoose.connect(MONGODB_URI)
+    .then(() => console.log('MongoDB Connected to Galaxy Database (Atlas)'))
     .catch(err => console.error('MongoDB Connection Error:', err));
 
 // Models (Defined inline or imported - needing ESM conversion for imported models too, 
